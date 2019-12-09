@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
+from flask_cors import CORS, cross_origin
 import os
 from datetime import timedelta
 
@@ -20,12 +21,14 @@ class Main(Flask):
 db = SQLAlchemy()
 app = Main(__name__, template_folder=os.getcwd() + '/web/templates/',
            static_folder=os.getcwd() + "/web/static/")
-manager = Manager(app)
-
+# manager = Manager(app)
+CORS(app, supports_credentials=True)
 from web.view.video.video import video_index
+from web.view.admin.admin_login import admin_index
+
 
 app.register_blueprint(video_index, url_prefix='/')
-
+app.register_blueprint(admin_index, prefix_url='/')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

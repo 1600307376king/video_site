@@ -10,7 +10,7 @@ from passlib.apps import custom_app_context as pwd_context
 
 class Admin(db.Model):
     __table_name__ = 'admin'
-    admin_di = db.Column(db.INT, primary_key=True)
+    admin_id = db.Column(db.INT, primary_key=True)
     admin_name = db.Column(db.String(255))
     admin_password = db.Column(db.String(255))
     permissions = db.Column(db.String(255))
